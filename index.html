@@ -1,94 +1,13 @@
-<!doctype html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>天下IF｜桶狭間72時間 無JSプレイテスト</title>
-<style>
-:root{--bg:#0d1117;--panel:#161d27;--panel2:#1d2633;--text:#f2eee6;--muted:#aeb7c4;--line:#364150;--gold:#d9b56f;--red:#d76b64;--green:#78b995;--blue:#79a9dc}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 20% 0,#20293a 0,#0d1117 42%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI",Meiryo,sans-serif;line-height:1.7}
-main{max-width:820px;margin:auto;padding:18px 14px 80px}.hero,.scene,.ending{background:linear-gradient(180deg,#1b2330,#121820);border:1px solid var(--line);border-radius:20px;box-shadow:0 18px 50px #0007;padding:clamp(22px,5vw,46px);margin:0 0 22px}.hero{min-height:78vh;display:grid;align-content:center;position:relative;overflow:hidden}.hero:after{content:"天";position:absolute;right:-30px;bottom:-90px;font:900 330px/1 serif;color:#d9b56f0c;pointer-events:none}h1{font:900 clamp(44px,12vw,84px)/.95 serif;margin:0 0 14px}.chapter{font-weight:900;color:var(--gold);font-size:clamp(20px,5vw,30px);margin-bottom:24px}.lead{font-size:clamp(19px,4.6vw,28px);font-weight:800}.muted{color:var(--muted)}.btn,.choice{display:block;width:100%;text-decoration:none;color:var(--text);border:1px solid var(--line);background:#232d3c;padding:14px 16px;border-radius:14px;font-weight:800;margin:10px 0;text-align:left}.btn{display:inline-block;width:auto;background:linear-gradient(135deg,#a77b35,#d3ac61);color:#111;border-color:#d3ac61;text-align:center}.btn.secondary{background:#232d3c;color:var(--text);border-color:var(--line)}.kicker{font-size:12px;letter-spacing:.12em;color:var(--gold);font-weight:900}.scene h2{margin:3px 0 8px;font-size:clamp(26px,7vw,40px);font-family:serif}.intel{border-left:3px solid var(--gold);padding:10px 14px;background:#ffffff08;border-radius:8px;margin:14px 0}.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:16px 0}.stat{background:#0f151d;border:1px solid var(--line);border-radius:12px;padding:10px 12px}.stat b{display:block;color:var(--gold)}
-input[type=radio]{position:absolute;opacity:0;pointer-events:none}.outcome{display:none}.scene.next{display:block}.ending{display:block}.choice:hover{border-color:#65748a}.choice small{display:block;font-weight:500;color:var(--muted);margin-top:3px}
-#d1a:checked~#d1 .a,#d1b:checked~#d1 .b,#d1c:checked~#d1 .c,#d1d:checked~#d1 .d,#d1e1:checked~#d1 .e1,#d1e2:checked~#d1 .e2,#d1e3:checked~#d1 .e3{display:block}
-#d2a:checked~#d2 .a,#d2b:checked~#d2 .b,#d2c:checked~#d2 .c,#d2d:checked~#d2 .d,#d2e1:checked~#d2 .e1,#d2e2:checked~#d2 .e2,#d2e3:checked~#d2 .e3{display:block}
-#d3a:checked~#d3 .a,#d3b:checked~#d3 .b,#d3c:checked~#d3 .c,#d3d:checked~#d3 .d,#d3e1:checked~#d3 .e1,#d3e2:checked~#d3 .e2,#d3e3:checked~#d3 .e3{display:block}
-.badge{display:inline-block;padding:4px 9px;border-radius:999px;border:1px solid var(--line);font-size:12px;margin:3px 4px 3px 0}.good{color:#a9e1bf}.warn{color:#f0c885}.bad{color:#f29a94}.cause{background:#0d141d;border:1px solid var(--line);border-radius:12px;padding:13px;margin-top:10px}.cause b{color:var(--gold)}details{border:1px dashed #596779;border-radius:12px;padding:10px 12px;margin:10px 0}summary{font-weight:900;cursor:pointer}.reset{margin-top:22px}.note{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;margin-top:20px}@media(max-width:520px){.stats{grid-template-columns:1fr}.hero,.scene,.ending{border-radius:16px;padding:22px 18px}}
-</style>
-</head>
-<body>
-<main>
-<section class="hero" id="top">
-  <div class="kicker">PLAYTEST / NO-JAVASCRIPT FALLBACK</div>
-  <h1>天下IF</h1>
-  <div class="chapter">第一章　桶狭間72時間</div>
-  <p class="lead">1560年。織田信長。<br>史実を知らないあなたは、生き残れるか。</p>
-  <p class="muted">未来の正解は知らない。手元に届く報告、兵、時間、家臣の意見だけで判断せよ。</p>
-  <p><a class="btn" href="#d1">評定を始める</a></p>
-  <p class="note">この版はChatGPT内プレビューでも遊べるよう、JavaScriptを使っていません。E自由入力は3つの代表作戦から選ぶ限定代替版です。</p>
-</section>
+天下IF P1.0
+桶狭間 1560 ｜ 軍勢を「選び、動かす」最小試作
 
-<!-- radios must precede scenes for CSS sibling selectors -->
-<input type="radio" name="d1" id="d1a"><input type="radio" name="d1" id="d1b"><input type="radio" name="d1" id="d1c"><input type="radio" name="d1" id="d1d"><input type="radio" name="d1" id="d1e1"><input type="radio" name="d1" id="d1e2"><input type="radio" name="d1" id="d1e3">
-<section class="scene" id="d1">
-<div class="kicker">D1 / 清洲城</div><h2>今川軍、尾張へ</h2>
-<p>東から大軍が進む。丸根・鷲津の砦は圧迫され、城内では「籠城すべき」との声が強い。敵の総兵力も義元本隊の位置も確定していない。</p>
-<div class="stats"><div class="stat"><b>織田兵力</b>少数・即応可能</div><div class="stat"><b>情報</b>断片的</div><div class="stat"><b>時間</b>残り72h</div><div class="stat"><b>家臣</b>意見割れる</div></div>
-<div class="intel">報告：「今川方の先鋒が砦方面へ進出。松平元康も動いている模様」</div>
-<label class="choice" for="d1a">A　清洲から即座に主力を出す<small>時間を失わない。情報不足のまま接触する危険。</small></label>
-<label class="choice" for="d1b">B　斥候を増やし、今川本隊の位置を探る<small>情報を買う。代わりに砦への圧力は増える。</small></label>
-<label class="choice" for="d1c">C　清洲防衛を固める<small>織田家存続を最優先。主導権を今川に渡す。</small></label>
-<label class="choice" for="d1d">D　家臣を分散し、砦救援と情報収集を同時に行う<small>柔軟だが戦力が薄くなる。</small></label>
-<details><summary>E　自由作戦（無JS限定版）</summary>
-<label class="choice" for="d1e1">E1　陽動して本隊を探る</label><label class="choice" for="d1e2">E2　籠城準備を見せつつ密かに出撃準備</label><label class="choice" for="d1e3">E3　元康へ密使を送る</label></details>
-<div class="outcome a cause"><b>結果</b>：出撃準備は迅速。だが進路判断に使える情報が不足した。 <span class="badge good">時間+</span><span class="badge bad">情報-</span></div>
-<div class="outcome b cause"><b>結果</b>：敵の移動経路について複数の報告を得る。砦からは急報が重なる。 <span class="badge good">情報++</span><span class="badge warn">砦危険+</span></div>
-<div class="outcome c cause"><b>結果</b>：清洲の防備は上がった。しかし今川軍は尾張内部へ進む余地を得る。 <span class="badge good">生存+</span><span class="badge bad">主導権-</span></div>
-<div class="outcome d cause"><b>結果</b>：情報と救援を両立するが、各隊は小さくなった。 <span class="badge good">柔軟性+</span><span class="badge warn">集中力-</span></div>
-<div class="outcome e1 cause"><b>結果</b>：偽の動きを見せ、敵の反応から指揮系統の所在を絞り込む。 <span class="badge good">情報+</span></div>
-<div class="outcome e2 cause"><b>結果</b>：籠城と思わせつつ、出撃できる態勢を残した。 <span class="badge good">奇襲余地+</span></div>
-<div class="outcome e3 cause"><b>結果</b>：密使は元康陣へ向かった。返答はまだない。 <span class="badge warn">外交の種</span></div>
-<p><a class="btn secondary" href="#d2">次の局面へ</a></p>
-</section>
 
-<input type="radio" name="d2" id="d2a"><input type="radio" name="d2" id="d2b"><input type="radio" name="d2" id="d2c"><input type="radio" name="d2" id="d2d"><input type="radio" name="d2" id="d2e1"><input type="radio" name="d2" id="d2e2"><input type="radio" name="d2" id="d2e3">
-<section class="scene next" id="d2">
-<div class="kicker">D2 / 熱田・善照寺方面</div><h2>砦陥落の報</h2>
-<p>戦況は動いた。今川先鋒は勝ちに沸く。義元本隊について「田楽狭間方面」「街道沿い」など食い違う報告が届く。</p>
-<label class="choice" for="d2a">A　熱田へ急行し、兵をまとめる</label><label class="choice" for="d2b">B　敵先鋒へ小規模攻撃を仕掛ける</label><label class="choice" for="d2c">C　本隊位置の確認を最優先する</label><label class="choice" for="d2d">D　複数経路へ斥候を放ちつつ前進する</label>
-<details><summary>E　自由作戦（無JS限定版）</summary><label class="choice" for="d2e1">E1　捕虜を取り情報を聞き出す</label><label class="choice" for="d2e2">E2　農民・商人から街道情報を集める</label><label class="choice" for="d2e3">E3　今川軍に偽情報を流す</label></details>
-<div class="outcome a cause"><b>結果</b>：兵のまとまりが改善。機動できる主力が形成された。</div><div class="outcome b cause"><b>結果</b>：先鋒に損害。ただし義元本隊に警戒を与えた可能性。</div><div class="outcome c cause"><b>結果</b>：義元本隊候補を二つまで絞る。</div><div class="outcome d cause"><b>結果</b>：情報は増えたが、斥候の帰還待ちで時間を消費。</div><div class="outcome e1 cause"><b>結果</b>：敵兵から休息地点らしき情報を得た。</div><div class="outcome e2 cause"><b>結果</b>：軍勢の通過時刻と旗印の目撃情報がつながった。</div><div class="outcome e3 cause"><b>結果</b>：一部隊が進路を変えた。敵内部に小さな混乱。</div>
-<p><a class="btn secondary" href="#d3">次の局面へ</a></p>
-</section>
-
-<input type="radio" name="d3" id="d3a"><input type="radio" name="d3" id="d3b"><input type="radio" name="d3" id="d3c"><input type="radio" name="d3" id="d3d"><input type="radio" name="d3" id="d3e1"><input type="radio" name="d3" id="d3e2"><input type="radio" name="d3" id="d3e3">
-<section class="scene next" id="d3">
-<div class="kicker">D3 / 午後</div><h2>空が暗くなる</h2>
-<p>強い雨。視界が悪化する。斥候から「輿・旗印・多数の近習を伴う集団」の報告。義元本人かは断定できない。</p>
-<div class="intel">重要：豪雨は敵の索敵も、こちらの統制も悪化させる。</div>
-<label class="choice" for="d3a">A　さらに接近して本人確認を狙う</label><label class="choice" for="d3b">B　雨が弱まるまで待つ</label><label class="choice" for="d3c">C　義元本隊と仮定して攻撃準備</label><label class="choice" for="d3d">D　退路を確保しつつ追尾する</label>
-<details><summary>E　自由作戦（無JS限定版）</summary><label class="choice" for="d3e1">E1　別働隊で退路を塞ぐ</label><label class="choice" for="d3e2">E2　大声・旗で大軍に見せかける</label><label class="choice" for="d3e3">E3　先に元康隊を牽制する</label></details>
-<div class="outcome a cause"><b>結果</b>：近習の配置から高位指揮官である可能性が上昇。奇襲時間は短くなる。</div><div class="outcome b cause"><b>結果</b>：統制は保てるが、敵も移動を再開する余地を得た。</div><div class="outcome c cause"><b>結果</b>：決戦態勢。外せば織田家そのものが危うい。</div><div class="outcome d cause"><b>結果</b>：生存余地を残したまま敵を追う。決定打は弱い。</div><div class="outcome e1 cause"><b>結果</b>：包囲成功時の利益は大きいが、主力が分散。</div><div class="outcome e2 cause"><b>結果</b>：雨と騒音を利用。敵側の認識を乱す。</div><div class="outcome e3 cause"><b>結果</b>：元康隊への警戒を優先。義元本隊への圧力は下がる。</div>
-<p><a class="btn secondary" href="#d4">決断へ</a></p>
-</section>
-
-<section class="scene next" id="d4">
-<div class="kicker">D4 / 決戦</div><h2>今、攻めるか</h2>
-<p>前方に今川の中枢らしき集団。雨音で双方の視界は悪い。こちらは少数。敵が態勢を整えれば勝ち目は急速に消える。</p>
-<a class="choice" href="#great">A　全軍で中枢へ突撃する<small>高リスク。義元中枢を崩せれば歴史的大勝利。</small></a><a class="choice" href="#capture">B　包囲し、義元の捕縛を狙う<small>難度は高いが、成功すれば史実超越。</small></a><a class="choice" href="#survive">C　ここでは戦わず、尾張防衛へ戻る<small>決戦を捨て、織田家の存続を優先。</small></a><a class="choice" href="#truce">D　使者を送り撤兵条件を探る<small>軍事決戦を政治戦へ変える。</small></a>
-<details><summary>E　自由作戦（無JS限定版）</summary><a class="choice" href="#great">E1　旗本だけを一点突破させる</a><a class="choice" href="#survive">E2　攻撃を装って撤退し敵を引き込む</a><a class="choice" href="#truce">E3　元康との離間工作を優先する</a></details>
-<p class="note">最終選択を押すと対応するエンディングへ移動します。無JS版では累積スコア判定を省略し、因果説明の読みやすさを先に確認します。</p>
-</section>
-
-<section class="scene next" id="result">
-<div class="kicker">ENDING / 因果台帳</div><h2>あなたが作った桶狭間</h2>
-<section class="ending" id="great"><h3>歴史的大勝利　「雨中の一点突破」</h3><p>織田軍は混乱する今川中枢へ到達。義元は戦場で討死し、侵攻軍は指揮を失った。</p><div class="cause"><b>主要因果</b><br>本隊候補の特定 → 豪雨で索敵低下 → 攻撃機会を逃さず集中 → 指揮中枢崩壊</div><p class="good">史実差分：織田家の威信が急上昇。周辺勢力の判断が変わる。</p></section>
-<section class="ending" id="capture"><h3>史実超越　「義元捕縛」</h3><p>慎重な確認と包囲が噛み合い、義元を生け捕りにした。勝利より厄介な外交カードが手に入る。</p><div class="cause"><b>主要因果</b><br>本人確認 → 退路制限 → 包囲 → 捕縛</div></section>
-<section class="ending" id="survive"><h3>戦略的生存　「清洲は落ちず」</h3><p>決戦は避けた。尾張の一部を失う可能性は残るが、信長と織田家の主力は生存。戦争は続く。</p><div class="cause"><b>主要因果</b><br>家存続を優先 → 決戦回避 → 主力保持 → 次の戦局へ</div></section>
-<section class="ending" id="truce"><h3>異説桶狭間　「刃ではなく条件」</h3><p>撤兵交渉は完全勝利ではない。しかし今川陣営内部の事情と時間を利用し、戦局を政治戦へ変えた。</p><div class="cause"><b>主要因果</b><br>接触回避 → 外交余地 → 今川側の利害分裂 → 侵攻速度低下</div></section>
-<section class="ending" id="bloody"><h3>辛勝／敗走　「情報不足の賭け」</h3><p>攻撃は敵を驚かせたが、中枢を完全には崩せない。織田軍にも大きな損害。勝敗は次の数日へ持ち越された。</p><div class="cause"><b>主要因果</b><br>情報不足 → 決戦強行 → 局地混乱 → 決定打不足</div></section>
-<p class="reset"><a class="btn secondary" href="#top">最初から遊ぶ</a></p>
-<p class="note">※選択状態を完全にリセットする場合は、ファイルを閉じて再度開いてください。</p>
-</section>
-</main>
-</body>
-</html>
+桶狭間周辺（概念戦場）
+信長
+本隊今川
+本隊
+軍令
+① 青い「信長本隊」をタップ
+② 戦場の好きな地点をタップして進軍
+配置をリセット
+P1.0では部隊移動を検証。勝敗・背後判定・敵AI・因果台帳は次段階で接続します。
