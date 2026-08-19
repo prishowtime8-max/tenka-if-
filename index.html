@@ -3,27 +3,33 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>天下IF P1.0 桶狭間</title>
+<title>天下IF P1.1 桶狭間</title>
+
 <style>
 *{box-sizing:border-box}
+
 body{
   margin:0;
   background:#0c1118;
   color:#f5f2e9;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
+
 .wrap{
   max-width:760px;
   margin:auto;
   padding:18px;
 }
+
 h1{
   font-size:26px;
   margin:6px 0;
 }
+
 .sub,.small{
   color:#aeb7c3;
 }
+
 .panel{
   background:#151d28;
   border:1px solid #334154;
@@ -31,6 +37,7 @@ h1{
   padding:14px;
   margin:12px 0;
 }
+
 #field{
   position:relative;
   width:100%;
@@ -38,8 +45,14 @@ h1{
   overflow:hidden;
   border-radius:18px;
   border:1px solid #526274;
-  background:linear-gradient(145deg,#36513b,#192c22 50%,#29422f);
+  background:linear-gradient(
+    145deg,
+    #36513b,
+    #192c22 50%,
+    #29422f
+  );
 }
+
 .road{
   position:absolute;
   left:-10%;
@@ -50,6 +63,7 @@ h1{
   transform:rotate(-18deg);
   opacity:.55;
 }
+
 .river{
   position:absolute;
   left:52%;
@@ -60,10 +74,11 @@ h1{
   transform:rotate(9deg);
   opacity:.75;
 }
+
 .unit{
   position:absolute;
-  width:82px;
-  height:82px;
+  width:76px;
+  height:76px;
   border-radius:50%;
   display:flex;
   align-items:center;
@@ -75,19 +90,32 @@ h1{
   transform:translate(-50%,-50%);
   transition:left .55s ease,top .55s ease;
   user-select:none;
+  z-index:2;
 }
+
 .oda{
   background:#183e7a;
   border-color:#77aaff;
 }
+
+.det{
+  background:#27558f;
+  border-color:#9bc3ff;
+  width:66px;
+  height:66px;
+  font-size:13px;
+}
+
 .imagawa{
   background:#7b2525;
   border-color:#ff8989;
 }
+
 .selected{
   outline:5px solid #f2c14e;
   outline-offset:4px;
 }
+
 .badge{
   position:absolute;
   top:10px;
@@ -96,11 +124,14 @@ h1{
   padding:7px 10px;
   border-radius:10px;
   font-size:13px;
+  z-index:3;
 }
+
 #msg{
-  min-height:56px;
+  min-height:72px;
   line-height:1.6;
 }
+
 button{
   width:100%;
   padding:13px;
@@ -111,165 +142,471 @@ button{
   font-size:16px;
   font-weight:800;
 }
+
 .small{
   font-size:13px;
   line-height:1.6;
+}
+
+.status{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+.chip{
+  background:#0d141d;
+  border:1px solid #334154;
+  border-radius:10px;
+  padding:7px 9px;
+  font-size:12px;
 }
 </style>
 </head>
 
 <body>
+
 <div class="wrap">
 
-<h1>天下IF <span style="color:#f2c14e">P1.0</span></h1>
-<div class="sub">桶狭間 1560 ｜ 軍勢を「選び、動かす」最小試作</div>
+<h1>
+  天下IF
+  <span style="color:#f2c14e">P1.1</span>
+</h1>
 
-<div class="panel">
-  <div id="field">
-
-    <div class="road"></div>
-    <div class="river"></div>
-
-    <div class="badge">桶狭間周辺（概念戦場）</div>
-
-    <div id="oda"
-         class="unit oda"
-         style="left:24%;top:72%">
-      信長<br>本隊
-    </div>
-
-    <div id="enemy"
-         class="unit imagawa"
-         style="left:72%;top:28%">
-      今川<br>本隊
-    </div>
-
-  </div>
+<div class="sub">
+桶狭間 1560 ｜ 信長軍を動かす。今川も動く。
 </div>
 
 <div class="panel">
-  <strong>軍令</strong>
-  <div id="msg">
-    ① 青い「信長本隊」をタップ<br>
-    ② 戦場の好きな地点をタップして進軍
-  </div>
+
+<div id="field">
+
+<div class="road"></div>
+<div class="river"></div>
+
+<div class="badge">
+桶狭間周辺（概念戦場）
+</div>
+
+<div
+  id="oda"
+  class="unit oda"
+  style="left:24%;top:72%">
+信長<br>本隊
+</div>
+
+<div
+  id="det"
+  class="unit det"
+  style="left:16%;top:82%">
+織田<br>別働隊
+</div>
+
+<div
+  id="enemy"
+  class="unit imagawa"
+  style="left:72%;top:28%">
+今川<br>本隊
+</div>
+
+</div>
 </div>
 
 <div class="panel">
-  <button id="reset">配置をリセット</button>
 
-  <p class="small">
-    P1.0では部隊移動を検証。
-    勝敗・背後判定・敵AI・因果台帳は次段階で接続します。
-  </p>
+<strong>軍令</strong>
+
+<div id="msg">
+① 青い部隊を選択<br>
+② 戦場をタップして進軍<br>
+③ 進軍後、今川軍も自動で行動します。
+</div>
+
+<div class="status">
+
+<span class="chip" id="turn">
+手番 1
+</span>
+
+<span class="chip" id="enemyMode">
+今川：進軍中
+</span>
+
+</div>
+</div>
+
+<div class="panel">
+
+<button id="reset">
+配置をリセット
+</button>
+
+<p class="small">
+P1.1では「敵も動く」を検証。
+今川は基本的に南下し、
+信長本隊が近づくと距離を取りながら
+進路を変更します。
+勝敗・側面・背後判定は次段階。
+</p>
+
 </div>
 
 </div>
 
 <script>
 
-const field = document.getElementById('field');
-const oda = document.getElementById('oda');
-const enemy = document.getElementById('enemy');
-const msg = document.getElementById('msg');
+const field =
+document.getElementById('field');
 
-let selected = false;
+const oda =
+document.getElementById('oda');
+
+const det =
+document.getElementById('det');
+
+const enemy =
+document.getElementById('enemy');
+
+const msg =
+document.getElementById('msg');
+
+const turnEl =
+document.getElementById('turn');
+
+const modeEl =
+document.getElementById('enemyMode');
+
+let selected = null;
+let turn = 1;
+
+
+/* =========================
+   味方部隊選択
+========================= */
+
+function selectUnit(unit,name){
+
+  selected = unit;
+
+  oda.classList.remove('selected');
+  det.classList.remove('selected');
+
+  unit.classList.add('selected');
+
+  msg.innerHTML =
+    name +
+    'を選択。<b>進軍地点をタップ。</b>';
+}
+
 
 oda.addEventListener('click', e => {
 
   e.stopPropagation();
 
-  selected = true;
-
-  oda.classList.add('selected');
-
-  msg.innerHTML =
-    '信長本隊を選択。<b>進軍地点をタップしてください。</b>';
+  selectUnit(
+    oda,
+    '信長本隊'
+  );
 
 });
+
+
+det.addEventListener('click', e => {
+
+  e.stopPropagation();
+
+  selectUnit(
+    det,
+    '織田別働隊'
+  );
+
+});
+
 
 enemy.addEventListener('click', e => {
 
   e.stopPropagation();
 
   msg.textContent =
-    '今川本隊。P1.0では敵軍はまだ操作できません。';
+    '今川本隊。こちらの進軍後に自動行動します。';
 
 });
+
+
+/* =========================
+   座標
+========================= */
+
+function pos(el){
+
+  return {
+
+    x:parseFloat(el.style.left),
+
+    y:parseFloat(el.style.top)
+
+  };
+
+}
+
+
+function clamp(v,min,max){
+
+  return Math.max(
+    min,
+    Math.min(max,v)
+  );
+
+}
+
+
+/* =========================
+   今川AI
+========================= */
+
+function enemyMove(){
+
+  const ep = pos(enemy);
+  const op = pos(oda);
+
+  let nx = ep.x;
+  let ny = ep.y;
+
+  const dx =
+    ep.x - op.x;
+
+  const dy =
+    ep.y - op.y;
+
+  const dist =
+    Math.hypot(dx,dy);
+
+
+  /* 信長が近い */
+
+  if(dist < 28){
+
+    modeEl.textContent =
+      '今川：警戒・転進';
+
+    nx +=
+      dx >= 0 ? 7 : -7;
+
+    ny +=
+      dy >= 0 ? 5 : -5;
+
+  }
+
+  /* 信長が遠い */
+
+  else{
+
+    modeEl.textContent =
+      '今川：南下';
+
+    ny += 7;
+
+    nx +=
+      (Math.random() - .5) * 5;
+
+  }
+
+
+  enemy.style.left =
+    clamp(nx,8,92) + '%';
+
+  enemy.style.top =
+    clamp(ny,9,91) + '%';
+
+
+  setTimeout(
+    reportSituation,
+    600
+  );
+
+}
+
+
+/* =========================
+   戦況判定
+========================= */
+
+function reportSituation(){
+
+  const ep = pos(enemy);
+  const op = pos(oda);
+  const dp = pos(det);
+
+  const d1 =
+    Math.hypot(
+      ep.x-op.x,
+      ep.y-op.y
+    );
+
+  const d2 =
+    Math.hypot(
+      ep.x-dp.x,
+      ep.y-dp.y
+    );
+
+
+  if(Math.min(d1,d2) < 15){
+
+    msg.innerHTML =
+      '⚔️ <b>接敵！</b> ' +
+      '今川軍との距離が詰まった。' +
+      '<br>次版で正面・側面・背後から' +
+      '戦闘判定へ接続。';
+
+  }
+
+  else if(d1 < 28){
+
+    msg.innerHTML =
+      '👀 <b>今川が信長本隊を警戒。</b>' +
+      '<br>進路を変えた。' +
+      '別働隊で回り込めるか？';
+
+  }
+
+  else{
+
+    msg.innerHTML =
+      '今川軍も行動した。' +
+      '<br><b>次の織田軍を選んで進軍。</b>';
+
+  }
+
+}
+
+
+/* =========================
+   プレイヤー移動
+========================= */
 
 field.addEventListener('click', e => {
 
   if(!selected){
 
     msg.textContent =
-      '先に青い「信長本隊」を選択してください。';
+      '先に青い「信長本隊」か' +
+      '「織田別働隊」を選択してください。';
 
     return;
+
   }
 
-  const r = field.getBoundingClientRect();
+
+  const r =
+    field.getBoundingClientRect();
+
 
   const x =
-    Math.max(
+    clamp(
+      (e.clientX-r.left)
+      /r.width*100,
       7,
-      Math.min(
-        93,
-        (e.clientX - r.left) / r.width * 100
-      )
+      93
     );
+
 
   const y =
-    Math.max(
+    clamp(
+      (e.clientY-r.top)
+      /r.height*100,
       8,
-      Math.min(
-        92,
-        (e.clientY - r.top) / r.height * 100
-      )
+      92
     );
 
-  oda.style.left = x + '%';
-  oda.style.top = y + '%';
 
-  selected = false;
+  selected.style.left =
+    x + '%';
 
-  oda.classList.remove('selected');
+  selected.style.top =
+    y + '%';
 
-  setTimeout(() => {
 
-    const a = oda.getBoundingClientRect();
-    const b = enemy.getBoundingClientRect();
+  selected.classList.remove(
+    'selected'
+  );
 
-    const d =
-      Math.hypot(
-        (a.left + a.width / 2) -
-        (b.left + b.width / 2),
+  selected = null;
 
-        (a.top + a.height / 2) -
-        (b.top + b.height / 2)
-      );
 
-    msg.innerHTML =
-      d < 130
-      ? '⚔️ <b>今川本隊に接近！</b><br>次版では正面・側面・背後を判定します。'
-      : '進軍完了。信長本隊を再選択して続けて移動できます。';
+  msg.textContent =
+    '織田軍、進軍中……今川軍が反応する。';
 
-  },600);
+
+  turn++;
+
+  turnEl.textContent =
+    '手番 ' + turn;
+
+
+  setTimeout(
+    enemyMove,
+    650
+  );
 
 });
+
+
+/* =========================
+   リセット
+========================= */
 
 document
 .getElementById('reset')
 .addEventListener('click', () => {
 
-  oda.style.left = '24%';
-  oda.style.top = '72%';
+  oda.style.left =
+    '24%';
 
-  selected = false;
+  oda.style.top =
+    '72%';
 
-  oda.classList.remove('selected');
+
+  det.style.left =
+    '16%';
+
+  det.style.top =
+    '82%';
+
+
+  enemy.style.left =
+    '72%';
+
+  enemy.style.top =
+    '28%';
+
+
+  selected = null;
+
+  turn = 1;
+
+
+  turnEl.textContent =
+    '手番 1';
+
+
+  modeEl.textContent =
+    '今川：進軍中';
+
+
+  oda.classList.remove(
+    'selected'
+  );
+
+  det.classList.remove(
+    'selected'
+  );
+
 
   msg.innerHTML =
-    '① 青い「信長本隊」をタップ<br>② 戦場の好きな地点をタップして進軍';
+    '① 青い部隊を選択<br>' +
+    '② 戦場をタップして進軍<br>' +
+    '③ 進軍後、今川軍も自動で行動します。';
 
 });
 
