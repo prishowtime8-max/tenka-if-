@@ -1,13 +1,279 @@
-天下IF P1.0
-桶狭間 1560 ｜ 軍勢を「選び、動かす」最小試作
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>天下IF P1.0 桶狭間</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#0c1118;
+  color:#f5f2e9;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+.wrap{
+  max-width:760px;
+  margin:auto;
+  padding:18px;
+}
+h1{
+  font-size:26px;
+  margin:6px 0;
+}
+.sub,.small{
+  color:#aeb7c3;
+}
+.panel{
+  background:#151d28;
+  border:1px solid #334154;
+  border-radius:16px;
+  padding:14px;
+  margin:12px 0;
+}
+#field{
+  position:relative;
+  width:100%;
+  aspect-ratio:4/5;
+  overflow:hidden;
+  border-radius:18px;
+  border:1px solid #526274;
+  background:linear-gradient(145deg,#36513b,#192c22 50%,#29422f);
+}
+.road{
+  position:absolute;
+  left:-10%;
+  top:48%;
+  width:125%;
+  height:11%;
+  background:#7a704f;
+  transform:rotate(-18deg);
+  opacity:.55;
+}
+.river{
+  position:absolute;
+  left:52%;
+  top:-5%;
+  width:12%;
+  height:115%;
+  background:#244d69;
+  transform:rotate(9deg);
+  opacity:.75;
+}
+.unit{
+  position:absolute;
+  width:82px;
+  height:82px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-weight:800;
+  border:4px solid #ddd;
+  box-shadow:0 8px 18px #0008;
+  transform:translate(-50%,-50%);
+  transition:left .55s ease,top .55s ease;
+  user-select:none;
+}
+.oda{
+  background:#183e7a;
+  border-color:#77aaff;
+}
+.imagawa{
+  background:#7b2525;
+  border-color:#ff8989;
+}
+.selected{
+  outline:5px solid #f2c14e;
+  outline-offset:4px;
+}
+.badge{
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:#0009;
+  padding:7px 10px;
+  border-radius:10px;
+  font-size:13px;
+}
+#msg{
+  min-height:56px;
+  line-height:1.6;
+}
+button{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:12px;
+  background:#b38b36;
+  color:white;
+  font-size:16px;
+  font-weight:800;
+}
+.small{
+  font-size:13px;
+  line-height:1.6;
+}
+</style>
+</head>
 
+<body>
+<div class="wrap">
 
-桶狭間周辺（概念戦場）
-信長
-本隊今川
-本隊
-軍令
-① 青い「信長本隊」をタップ
-② 戦場の好きな地点をタップして進軍
-配置をリセット
-P1.0では部隊移動を検証。勝敗・背後判定・敵AI・因果台帳は次段階で接続します。
+<h1>天下IF <span style="color:#f2c14e">P1.0</span></h1>
+<div class="sub">桶狭間 1560 ｜ 軍勢を「選び、動かす」最小試作</div>
+
+<div class="panel">
+  <div id="field">
+
+    <div class="road"></div>
+    <div class="river"></div>
+
+    <div class="badge">桶狭間周辺（概念戦場）</div>
+
+    <div id="oda"
+         class="unit oda"
+         style="left:24%;top:72%">
+      信長<br>本隊
+    </div>
+
+    <div id="enemy"
+         class="unit imagawa"
+         style="left:72%;top:28%">
+      今川<br>本隊
+    </div>
+
+  </div>
+</div>
+
+<div class="panel">
+  <strong>軍令</strong>
+  <div id="msg">
+    ① 青い「信長本隊」をタップ<br>
+    ② 戦場の好きな地点をタップして進軍
+  </div>
+</div>
+
+<div class="panel">
+  <button id="reset">配置をリセット</button>
+
+  <p class="small">
+    P1.0では部隊移動を検証。
+    勝敗・背後判定・敵AI・因果台帳は次段階で接続します。
+  </p>
+</div>
+
+</div>
+
+<script>
+
+const field = document.getElementById('field');
+const oda = document.getElementById('oda');
+const enemy = document.getElementById('enemy');
+const msg = document.getElementById('msg');
+
+let selected = false;
+
+oda.addEventListener('click', e => {
+
+  e.stopPropagation();
+
+  selected = true;
+
+  oda.classList.add('selected');
+
+  msg.innerHTML =
+    '信長本隊を選択。<b>進軍地点をタップしてください。</b>';
+
+});
+
+enemy.addEventListener('click', e => {
+
+  e.stopPropagation();
+
+  msg.textContent =
+    '今川本隊。P1.0では敵軍はまだ操作できません。';
+
+});
+
+field.addEventListener('click', e => {
+
+  if(!selected){
+
+    msg.textContent =
+      '先に青い「信長本隊」を選択してください。';
+
+    return;
+  }
+
+  const r = field.getBoundingClientRect();
+
+  const x =
+    Math.max(
+      7,
+      Math.min(
+        93,
+        (e.clientX - r.left) / r.width * 100
+      )
+    );
+
+  const y =
+    Math.max(
+      8,
+      Math.min(
+        92,
+        (e.clientY - r.top) / r.height * 100
+      )
+    );
+
+  oda.style.left = x + '%';
+  oda.style.top = y + '%';
+
+  selected = false;
+
+  oda.classList.remove('selected');
+
+  setTimeout(() => {
+
+    const a = oda.getBoundingClientRect();
+    const b = enemy.getBoundingClientRect();
+
+    const d =
+      Math.hypot(
+        (a.left + a.width / 2) -
+        (b.left + b.width / 2),
+
+        (a.top + a.height / 2) -
+        (b.top + b.height / 2)
+      );
+
+    msg.innerHTML =
+      d < 130
+      ? '⚔️ <b>今川本隊に接近！</b><br>次版では正面・側面・背後を判定します。'
+      : '進軍完了。信長本隊を再選択して続けて移動できます。';
+
+  },600);
+
+});
+
+document
+.getElementById('reset')
+.addEventListener('click', () => {
+
+  oda.style.left = '24%';
+  oda.style.top = '72%';
+
+  selected = false;
+
+  oda.classList.remove('selected');
+
+  msg.innerHTML =
+    '① 青い「信長本隊」をタップ<br>② 戦場の好きな地点をタップして進軍';
+
+});
+
+</script>
+
+</body>
+</html>
